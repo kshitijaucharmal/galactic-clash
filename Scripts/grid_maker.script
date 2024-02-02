@@ -1,0 +1,49 @@
+go.property("grid_size", 5)
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+    -- Set bg color
+    msg.post("@render:", "clear_color", { color = vmath.vector4(174 /256, 150 / 256, 255 / 256, 1 ) })
+    
+    self.cell_size = 125
+    self.offset = 50
+    self.grid_offset = vmath.vector3(1.5, 1.5, -0.01)
+
+    self.positions = {}
+
+    -- Spawn Platform
+    for i = 1,self.grid_size,1 do
+        self.positions[i] = {}
+        for j = 1,self.grid_size,1 do
+            x = i - 1 + self.grid_offset.x
+            y = j - 1 + self.grid_offset.y
+            local pos = vmath.vector3(x * self.cell_size + self.offset, y * self.cell_size + self.offset, self.grid_offset.z)
+            self.positions[i][j] = pos
+            local platform_id = factory.create("#platform_factory", pos)
+        end
+    end
+    
+    self.pp = {1, 1} -- Player position
+    msg.post("player", "player_pos", {self.positions[self.pp[1]][self.pp[2]]})
+end
+
+local function move_in_dir(self, dir, steps)
+    -- dir : 0, 1, 2, 3 -> left, right, up, down
+    x = self.pp[1]
+    y = self.pp[2]
+    if dir == 0 and x - steps > 0 then
+        x = x - steps
+    elseif dir == 1 and x + steps <= self.grid_size then
+        x = x + steps
+    elseif dir == 2 then
+        y = y + steps
+    elseif dir == 3 then
+        y = y - steps
+    end
+    local pos = self.positions[x][y]
+    if pos then
+        self.pp[1] = x
+        self.pp[2] = y
+        msg.post("player", "player_pos", {pos})
+    end
+end

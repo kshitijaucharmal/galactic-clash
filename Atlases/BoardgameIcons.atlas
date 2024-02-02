@@ -1,0 +1,114 @@
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_add.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_tap.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_down.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_flip.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_lift.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_place.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_fan.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_flip.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_seek.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_take.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_diagonal.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_outline.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_remove.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_rotate.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_subtract.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_tap_down.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_tap_up.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/card_target.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_order.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_return.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_shift.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_shuffle.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_skull.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_stack.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_under.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/BoardGame/kenney_board-game-icons/PNG/Double (128px)/cards_stack_high.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0
+max_page_width: 0
+max_page_height: 0
+rename_patterns: ""
