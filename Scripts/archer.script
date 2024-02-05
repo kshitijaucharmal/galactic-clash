@@ -1,16 +1,45 @@
+go.property("skip_turns", 2)
+go.property("bullet_speed", 500)
+go.property("damage", 10)
 
-function init()
-
+function init(self)
+	self.can_play_count = 0
+	face_player()
 end
 
 function face_player()
-
+	local pos = go.get("player#player", "old_position")
+	local dir = pos - go.get_position()
+	local rot = vmath.quat_rotation_z(math.atan2(dir.y, dir.y) - (90 * math.pi/180))
+	go.animate(".", "rotation", go.PLAYBACK_ONCE_FORWARD, rot, go.EASING_INOUTCIRC, 0.5)
 end
 
 function shoot(self)
+	local pos = go.get("player#player", "old_position")
+	local dir = pos - go.get_position()
+	local bullet = factory.create("#bullet_factory", go.get_position())
+	local duration = vmath.length(dir) / self.bullet_speed
+	go.animate(bullet, "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, duration, 0, function()
+		if go.get_position(bullet) == go.get_position("player") then
+			msg.post("player", "archer_attack")
+		end
+		go.delete(bullet)
+	end)
+end
 
+function update(self, dt)
+	local can_play = not go.get("manager#turn_manager", "player_turn")
+	if can_play then
+		self.can_play_count = self.can_play_count + 1
+		if self.can_play_count == self.skip_turns then
+			face_player()
+			shoot(self)
+			msg.post("manager#turn_manager", "enemy_done")
+			self.can_play_count = 0
+		end
+	end
 end
 
 function on_message(self, message_id, message, sender)
-
+	
 end

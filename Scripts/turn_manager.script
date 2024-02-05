@@ -40,7 +40,6 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("enemy_done") then
-		print("Player Can play")
 		self.player_turn = true
 		msg.post("grid_maker", "player_turn")
 	end

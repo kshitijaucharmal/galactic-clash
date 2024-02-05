@@ -40,10 +40,10 @@ function die()
 	go.delete()
 end
 
-function shoot(self)
+function shoot_laser(self)
+	print("player shooting")
 	local bullet = factory.create("#bullet_factory", go.get_position())
 	local pos = vmath.vector3()
-	-- Change this
 	if self.direction == hash("left") then
 		pos.x = go.get_position().x * -100
 		pos.y = go.get_position().y
@@ -68,7 +68,7 @@ function on_message(self, message_id, message, sender)
 		set_position(self, message[1])
 	end
 
-	if message_id == hash("archer_damage") then
+	if message_id == hash("archer_attack") then
 		-- Reduce health randomly between 5 and 10 HP
 		self.health = self.health - math.random(5, 10)
 		if self.health <= 0 then 
@@ -81,7 +81,7 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("shoot") then
-		shoot(self)
+		shoot_laser(self)
 		go.set("grid_maker#grid_maker", "can_play", false)
 		msg.post("manager", "player_done")
 	end

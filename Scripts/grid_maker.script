@@ -59,6 +59,9 @@ function init(self)
     
     self.pp = {1, 1} -- Player position
     msg.post("player", "player_pos", {self.positions[self.pp[1]][self.pp[2]]})
+    timer.delay(1, false, function()
+        msg.post("player", "rotate", {"up"})
+    end)
 end
 
 local function move_in_dir(self, dir, steps)
@@ -82,14 +85,28 @@ local function move_in_dir(self, dir, steps)
     end
 end
 
+function check_enemies(self, pos)
+    print("Archer")
+    for pos in self.archer_positions do
+        print(pos[1] .. pos[2])
+    end
+    print("Basher")
+    for pos in self.basher_positions do
+        print(pos[1] .. pos[2])
+    end
+end
+
 function attack_point(self, pos)
     if self.positions[pos[1]] then
-        if pos[2] ~= 0 then 
+        if pos[2] ~= 0 then
+            -- particlefx
             local id = factory.create("#attack_factory", self.positions[pos[1]][pos[2]])
             particlefx.play(msg.url("main", id, "exploison"))
             timer.delay(1, false, function()
                 go.delete(id)
             end)
+            -- Remove any enemy if present
+            check_enemies(self, pos)
         end
     end
 end
