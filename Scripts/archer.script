@@ -4,14 +4,16 @@ go.property("damage", 10)
 
 function init(self)
 	self.can_play_count = 0
-	face_player()
+	face_player(self, false)
 end
 
-function face_player()
+function face_player(self, s)
 	local pos = go.get("player#player", "old_position")
 	local dir = vmath.normalize(pos - go.get_position())
 	local rot = vmath.quat_rotation_z(math.atan2(dir.y, dir.x) - (90 * math.pi/180))
-	go.animate(".", "rotation", go.PLAYBACK_ONCE_FORWARD, rot, go.EASING_INOUTCIRC, 0.5)
+	go.animate(".", "rotation", go.PLAYBACK_ONCE_FORWARD, rot, go.EASING_INOUTCIRC, 0.5, 0, function()
+		if s then shoot(self) end
+	end)
 end
 
 function shoot(self)
@@ -32,8 +34,7 @@ function update(self, dt)
 	if can_play then
 		self.can_play_count = self.can_play_count + 1
 		if self.can_play_count == self.skip_turns then
-			face_player()
-			shoot(self)
+			face_player(self, true)
 			msg.post("manager#turn_manager", "enemy_done")
 			self.can_play_count = 0
 		end
@@ -41,5 +42,11 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	
+	-- check for the message
+	if message_id == hash("collision_response") then
+		-- take action
+		print("I collided with", message.other_id)
+		go.delete(message.other_id)
+		go.delete()
+	end
 end

@@ -17,6 +17,11 @@ components {
     value: "1.0"
     type: PROPERTY_TYPE_NUMBER
   }
+  properties {
+    id: "damage"
+    value: "10.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
 }
 embedded_components {
   id: "sprite"

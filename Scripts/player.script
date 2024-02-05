@@ -38,6 +38,7 @@ end
 
 function die()
 	msg.post("manager", "player_death")
+	msg.post("grid_maker", "player_death")
 	go.delete()
 end
 

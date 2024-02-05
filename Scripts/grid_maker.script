@@ -2,16 +2,18 @@ go.property("grid_size", 5)
 go.property("n_archers", 2)
 go.property("n_bashers", 1)
 go.property("can_play", false)
+go.property("enemy_count", 0)
+go.property("player_dead", false)
 
 function init_archers(self)
     for i = 1, self.n_archers, 1 do
         local pos = vmath.vector3(0, 0, 0)
         pos.x = math.random(2, self.grid_size)
         pos.y = math.random(2, self.grid_size)
-        self.archer_positions[i] = pos
         local p = self.positions[pos.x][pos.y]
         p.z = 1
-        factory.create("#archer_factory", p)
+        local id = factory.create("#archer_factory", p)
+        self.archers[i] = id
     end
 end
 
@@ -20,10 +22,10 @@ function init_bashers(self)
         local pos = vmath.vector3(0, 0, 0)
         pos.x = math.random(2, self.grid_size)
         pos.y = math.random(2, self.grid_size)
-        self.basher_positions[i] = pos
         local p = self.positions[pos.x][pos.y]
         p.z = 1
-        factory.create("#basher_factory", p)
+        local id = factory.create("#basher_factory", p)
+        self.bashers[i] = id
     end
 end
 
@@ -39,8 +41,13 @@ function init(self)
     self.grid_offset = vmath.vector3(1.5, 1.5, -0.01)
 
     self.positions = {}
-    self.archer_positions = {}
-    self.basher_positions = {}
+    self.archers = {}
+    self.bashers = {}
+
+    msg.post("ui#win_text", "disable")
+    msg.post("ui#lose_text", "disable")
+
+    self.enemy_count = self.n_bashers + self.n_archers
 
     -- Spawn Platform
     for i = 1,self.grid_size,1 do
@@ -85,15 +92,27 @@ local function move_in_dir(self, dir, steps)
     end
 end
 
-function check_enemies(self, pos)
-    print("Archer")
-    for pos in self.archer_positions do
-        print(pos[1] .. pos[2])
+function check_enemies(self, target)
+    local target_pos = self.positions[target[1]][target[2]]
+    for i, id in pairs(self.archers) do
+        local pos = go.get_position(id)
+        if pos.x == target_pos.x and pos.y == target_pos.y then
+            go.delete(id)
+            self.enemy_count = self.enemy_count - 1
+        end
     end
-    print("Basher")
-    for pos in self.basher_positions do
-        print(pos[1] .. pos[2])
+    for i, id in pairs(self.bashers) do
+        local pos = go.get_position(id)
+        if pos.x == target_pos.x and pos.y == target_pos.y then
+            go.delete(id)
+            self.enemy_count = self.enemy_count - 1
+        end
     end
+end
+
+function update(self, dt)
+    if self.enemy_count <= 0 then msg.post("ui#win_text", "enable") end
+    if self.player_dead then msg.post("ui#lose_text", "enable") end
 end
 
 function attack_point(self, pos)
@@ -141,6 +160,8 @@ function get_front(self, dir, steps)
     timer.delay(1, false, function()
         go.delete(id)
     end)
+    -- Remove any enemy if present
+    check_enemies(self, pos)
 end
 
 function wait_for_turn(self)
@@ -166,5 +187,9 @@ function on_message(self, message_id, message, sender)
     if message_id == hash("range") and self.can_play then
         get_neighbors(self, message[1], message[2])
         wait_for_turn(self)
+    end
+
+    if message_id == hash("player_death") then
+        self.player_dead = true
     end
 end
