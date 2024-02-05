@@ -8,6 +8,8 @@ function init(self)
 	self.positions = {}
 	self.current_position = 1
 
+	math.randomseed(os.time())
+
 	-- Spawn Card Holders (4)
 	for i = 1, 4, 1 do
 		x = i - 1 + self.card_offset.x
@@ -24,6 +26,16 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("pos_filled") then
 		if self.current_position <= 4 then
 			self.current_position = self.current_position + 1
+		end
+		msg.post("card_stack", "current_position", {self.positions[self.current_position]})
+	end
+
+	if message_id == hash("pos_emptied") then
+		if self.current_position > 0 then
+			self.current_position = self.current_position - 1
+		end
+		if self.current_position == 1 then 
+			msg.post("card_stack", "empty_deck")
 		end
 		msg.post("card_stack", "current_position", {self.positions[self.current_position]})
 	end

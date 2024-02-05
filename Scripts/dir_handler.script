@@ -1,0 +1,51 @@
+go.property("dir", 2)
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.current_dir = "#left_arrow"
+	self.default_scale = go.get(self.current_dir, "scale")
+	change_dir(self, self.dir, false)
+end
+
+function change_dir(self, dir, post)
+	-- dir : 0, 1, 2, 3 -> left, right, up, down	
+	go.set("#dir_handler", "dir", dir)
+	self.dir = dir
+	if dir == 0 then dir = "left" end
+	if dir == 1 then dir = "right" end
+	if dir == 2 then dir = "up" end
+	if dir == 3 then dir = "down" end
+
+	if post then msg.post("player#player", "rotate", {dir}) end
+
+	label.set_text("#current_dir", string.upper(dir))
+	self.current_dir = "#" .. dir .. "_arrow"
+	local dirs = {
+		"#left_arrow",
+		"#up_arrow",
+		"#right_arrow",
+		"#down_arrow",
+	}
+	for i, animation in pairs(dirs) do
+		go.cancel_animations(animation)
+		go.set(animation, "scale", self.default_scale)
+	end
+
+	go.animate(self.current_dir, "scale", go.PLAYBACK_LOOP_PINGPONG, self.default_scale * 1.2, go.EASING_INOUTCIRC, 0.5)
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("left") and action.pressed then
+		change_dir(self, 0, true)
+	elseif action_id == hash("right") and action.pressed then
+		change_dir(self, 1, true)
+	elseif action_id == hash("up") and action.pressed then
+		change_dir(self, 2, true)
+	elseif action_id == hash("down") and action.pressed then
+		change_dir(self, 3, true)
+	end
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end

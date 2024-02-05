@@ -43,20 +43,21 @@ end
 -- @return Will return value returned by the callback function for
 -- tge game object that received input or false if no game object
 -- received input 
-function M.on_input(action_id, action)
-	for _,sprite_data in pairs(sprites) do
-		local go_scale = go.get_scale_vector(sprite_data.go_url)
-		local sprite_scale = go.get(sprite_data.sprite_url, "scale")
-		local size = sprite_data.size
-		local pos = go.get_position(sprite_data.go_url)
-		pos.x = pos.x + sprite_data.offset.x * go_scale.x
-		pos.y = pos.y + sprite_data.offset.y * go_scale.y
-		
-		local scaled_size = vmath.vector3(size.x * go_scale.x * sprite_scale.x, size.y * go_scale.y * sprite_scale.y, 0)
-		
-		if action.x >= pos.x - scaled_size.x / 2 and action.x <= pos.x + scaled_size.x / 2 and action.y >= pos.y - scaled_size.y / 2 and action.y <= pos.y + scaled_size.y / 2 then
-			return sprite_data.callback(sprite_data.go_url, action_id, action)
-		end
+function M.on_input(sprite_url, action_id, action)
+	assert(sprite_url)
+	sprite_url = type(sprite_url) == "string" and msg.url(sprite_url) or sprite_url
+	sprite_data = sprites[key_from_url(sprite_url)]
+	local go_scale = go.get_scale_vector(sprite_data.go_url)
+	local sprite_scale = go.get(sprite_data.sprite_url, "scale")
+	local size = sprite_data.size
+	local pos = go.get_position(sprite_data.go_url)
+	pos.x = pos.x + sprite_data.offset.x * go_scale.x
+	pos.y = pos.y + sprite_data.offset.y * go_scale.y
+	
+	local scaled_size = vmath.vector3(size.x * go_scale.x * sprite_scale.x, size.y * go_scale.y * sprite_scale.y, 0)
+	
+	if action.x >= pos.x - scaled_size.x / 2 and action.x <= pos.x + scaled_size.x / 2 and action.y >= pos.y - scaled_size.y / 2 and action.y <= pos.y + scaled_size.y / 2 then
+		return sprite_data.callback(sprite_data.go_url, action_id, action)
 	end
 	return false
 end

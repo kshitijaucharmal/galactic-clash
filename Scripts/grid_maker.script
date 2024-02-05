@@ -1,15 +1,46 @@
 go.property("grid_size", 5)
+go.property("n_archers", 2)
+go.property("n_bashers", 1)
+go.property("can_play", false)
+
+function init_archers(self)
+    for i = 1, self.n_archers, 1 do
+        local pos = vmath.vector3(0, 0, 0)
+        pos.x = math.random(2, self.grid_size)
+        pos.y = math.random(2, self.grid_size)
+        self.archer_positions[i] = pos
+        local p = self.positions[pos.x][pos.y]
+        p.z = 1
+        factory.create("#archer_factory", p)
+    end
+end
+
+function init_bashers(self)
+    for i = 1, self.n_bashers, 1 do
+        local pos = vmath.vector3(0, 0, 0)
+        pos.x = math.random(2, self.grid_size)
+        pos.y = math.random(2, self.grid_size)
+        self.basher_positions[i] = pos
+        local p = self.positions[pos.x][pos.y]
+        p.z = 1
+        factory.create("#basher_factory", p)
+    end
+end
 
 function init(self)
+    -- particlefx.play("attack_effect#exploison")
     msg.post(".", "acquire_input_focus")
+    math.randomseed(os.time())
     -- Set bg color
-    msg.post("@render:", "clear_color", { color = vmath.vector4(174 /256, 150 / 256, 255 / 256, 1 ) })
+    msg.post("@render:", "clear_color", { color = vmath.vector4(0.153, 0.161, 0.176, 1 ) })
     
     self.cell_size = 125
     self.offset = 50
     self.grid_offset = vmath.vector3(1.5, 1.5, -0.01)
 
     self.positions = {}
+    self.archer_positions = {}
+    self.basher_positions = {}
 
     -- Spawn Platform
     for i = 1,self.grid_size,1 do
@@ -22,6 +53,9 @@ function init(self)
             local platform_id = factory.create("#platform_factory", pos)
         end
     end
+
+    init_archers(self)
+    init_bashers(self)
     
     self.pp = {1, 1} -- Player position
     msg.post("player", "player_pos", {self.positions[self.pp[1]][self.pp[2]]})
@@ -45,5 +79,75 @@ local function move_in_dir(self, dir, steps)
         self.pp[1] = x
         self.pp[2] = y
         msg.post("player", "player_pos", {pos})
+    end
+end
+
+function attack_point(self, pos)
+    if self.positions[pos[1]] then
+        if pos[2] ~= 0 then 
+            local id = factory.create("#attack_factory", self.positions[pos[1]][pos[2]])
+            particlefx.play(msg.url("main", id, "exploison"))
+            timer.delay(1, false, function()
+                go.delete(id)
+            end)
+        end
+    end
+end
+
+function get_neighbors(self)
+    local up = {self.pp[1], self.pp[2] + 1}
+    local down = {self.pp[1], self.pp[2] - 1}
+    local left = {self.pp[1] - 1, self.pp[2]}
+    local right = {self.pp[1] + 1, self.pp[2]}
+
+    attack_point(self, up)
+    attack_point(self, down)
+    attack_point(self, left)
+    attack_point(self, right)
+end
+
+function get_front(self, dir, steps)
+    local attack_pos = {}
+    attack_pos[1] = self.pp[1]
+    attack_pos[2] = self.pp[2]
+    if dir == 0 then
+        attack_pos[1] = attack_pos[1] - steps
+    elseif dir == 1 then
+        attack_pos[1] = attack_pos[1] + steps
+    elseif dir == 2 then
+        attack_pos[2] = attack_pos[2] + steps
+    elseif dir == 3 then
+        attack_pos[2] = attack_pos[2] - steps
+    end
+    local id = factory.create("#attack_factory", self.positions[attack_pos[1]][attack_pos[2]])
+    particlefx.play(msg.url("main", id, "exploison"))
+    timer.delay(1, false, function()
+        go.delete(id)
+    end)
+end
+
+function wait_for_turn(self)
+    self.can_play = false
+    msg.post("manager", "player_done")
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("player_turn") then
+        self.can_play = true
+    end
+    
+    if message_id == hash("move_in_dir") and self.can_play then
+        move_in_dir(self, message[1], message[2])
+        wait_for_turn(self)
+    end
+
+    if message_id == hash("attack") and self.can_play then
+        get_front(self, message[1], message[2])
+        wait_for_turn(self)
+    end
+
+    if message_id == hash("range") and self.can_play then
+        get_neighbors(self, message[1], message[2])
+        wait_for_turn(self)
     end
 end

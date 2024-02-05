@@ -1,0 +1,198 @@
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed01.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed02.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed03.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed04.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed05.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed06.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed07.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed08.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed09.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed10.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed11.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed12.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed13.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed14.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed15.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserRed16.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue01.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue02.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue03.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue04.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue05.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue06.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue07.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue08.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue09.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue10.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue11.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue12.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue13.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue14.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue15.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserBlue16.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen01.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen02.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen03.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen04.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen05.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen06.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen07.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen08.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen09.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen10.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen11.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen12.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen13.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen14.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen15.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/SpaceAssets/PNG/Lasers/laserGreen16.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0
+max_page_width: 0
+max_page_height: 0
+rename_patterns: ""

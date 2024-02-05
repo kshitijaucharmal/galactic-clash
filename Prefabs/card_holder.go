@@ -3,7 +3,7 @@ embedded_components {
   type: "sprite"
   data: "tile_set: \"/Atlases/images.atlas\"\n"
   "default_animation: \"ufoRed\"\n"
-  "material: \"/Shaders/outline.material\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
   position {

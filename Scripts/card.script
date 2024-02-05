@@ -1,48 +1,84 @@
-function init(self)
+local goput = require "main.goput"
 
+-- 0 - move, 1 - attack, 2 - shoot, 3 - range attack
+go.property("cardType", 0)
+-- Damage value (for attack, shoot, and range attack)
+go.property("damage", 100)
+-- only for move
+go.property("repeatCount", 1)
+-- only for range attack
+go.property("range", 500)
+
+local function use_card()
+	local cardType = go.get("#card", hash("cardType"))
+	local dir = go.get("directions#dir_handler", "dir")
+	local rc = go.get("#card", hash("repeatCount"))
+	-- Move
+	if cardType == 0 then
+		msg.post("grid_maker", "move_in_dir", {dir, rc})
+	end
+
+	-- Attack
+	if cardType == 1 then
+		msg.post("grid_maker", "attack", {dir, rc})
+	end
+
+	-- Shoot
+	if cardType == 2 then
+		msg.post("player", "shoot")
+	end
+
+	-- RANGE 
+	if cardType == 3 then
+		msg.post("grid_maker", "range", {dir, rc})
+	end
+	
+	msg.post("card_area#card_area", "pos_emptied")
+	go.delete()
+end
+
+local function handle_click(url, action_id, action)
+	if action_id == hash("leftclick") and action.released then
+		-- Animate to scale up and go to center of screen
+		local x = sys.get_config("display.width") / 2
+		local y = sys.get_config("display.height") / 2
+		local pos = vmath.vector3(x, y, 0)
+		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_INOUTCIRC, 0.5)
+		go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(4, 4, 0.1), go.EASING_INOUTCIRC, 0.5, 0, function()
+			go.animate("#sprite", "tint", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(1, 1, 1, 0), go.EASING_INOUTCIRC, 1.5, 0, use_card())
+		end)
+	end
+end
+
+function color_from_type(t)
+	if t == 0 then
+		go.set("#sprite", "tint", vmath.vector4(1, 0, 0, 1))
+	end
+end
+
+local function init_properties(self)
+	local card_mapper = {
+		"MOVE", "ATTACK", "SHOOT", "RANGE"
+	}
+	
+	self.cardType = math.random(0, 3)
+	color_from_type(self.cardType)
+	self.repeatCount = math.random(1, 3)
+	
+	label.set_text("#repeat_count", tostring(self.repeatCount))
+	label.set_text("#card_type", card_mapper[self.cardType+1])
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	init_properties(self)
+	goput.add(msg.url("#sprite"), nil, handle_click)
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
-function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	msg.post(".", "release_input_focus")
 end
 
 function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+	return goput.on_input("#sprite", action_id, action)
 end
