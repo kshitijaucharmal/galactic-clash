@@ -9,8 +9,8 @@ end
 
 function face_player()
 	local pos = go.get("player#player", "old_position")
-	local dir = pos - go.get_position()
-	local rot = vmath.quat_rotation_z(math.atan2(dir.y, dir.y) - (90 * math.pi/180))
+	local dir = vmath.normalize(pos - go.get_position())
+	local rot = vmath.quat_rotation_z(math.atan2(dir.y, dir.x) - (90 * math.pi/180))
 	go.animate(".", "rotation", go.PLAYBACK_ONCE_FORWARD, rot, go.EASING_INOUTCIRC, 0.5)
 end
 
