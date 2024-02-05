@@ -25,7 +25,7 @@ local function use_card()
 
 	-- Shoot
 	if cardType == 2 then
-		msg.post("player", "shoot")
+		msg.post("player", "shoot", {rc})
 	end
 
 	-- RANGE 
@@ -44,15 +44,26 @@ local function handle_click(url, action_id, action)
 		local y = sys.get_config("display.height") / 2
 		local pos = vmath.vector3(x, y, 0)
 		go.animate(".", "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_INOUTCIRC, 0.5)
-		go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(4, 4, 0.1), go.EASING_INOUTCIRC, 0.5, 0, function()
+		go.animate(".", "scale", go.PLAYBACK_ONCE_FORWARD, vmath.vector3(4, 4, 1), go.EASING_INOUTCIRC, 0.5, 0, function()
 			go.animate("#sprite", "tint", go.PLAYBACK_ONCE_FORWARD, vmath.vector4(1, 1, 1, 0), go.EASING_INOUTCIRC, 1.5, 0, use_card())
 		end)
 	end
 end
 
 function color_from_type(t)
+	-- 0 - move, 1 - attack, 2 - shoot, 3 - range attack
+	local alpha = 0.5
 	if t == 0 then
-		go.set("#sprite", "tint", vmath.vector4(1, 0, 0, 1))
+		go.set("#sprite", "tint", vmath.vector4(0, 0.722, 1, alpha))
+	end
+	if t == 1 then
+		go.set("#sprite", "tint", vmath.vector4(1, 0.259, 0.035, alpha))
+	end
+	if t == 2 then
+		go.set("#sprite", "tint", vmath.vector4(0.035, 1, 0.11, alpha))
+	end
+	if t == 3 then
+		go.set("#sprite", "tint", vmath.vector4(0.341, 0.008, 0.812, alpha))
 	end
 end
 

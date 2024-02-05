@@ -84,7 +84,14 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("shoot") then
-		shoot_laser(self)
+		local ctr = 0
+		timer.delay(0.5, true, function(self, handle, time_elapsed)
+			shoot_laser(self)
+			ctr = ctr + 1
+			if ctr >= message[1] then
+				timer.cancel(handle)
+			end
+		end)
 		go.set("grid_maker#grid_maker", "can_play", false)
 		msg.post("manager", "player_done")
 	end

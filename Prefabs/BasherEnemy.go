@@ -19,7 +19,7 @@ components {
   }
   properties {
     id: "damage"
-    value: "40.0"
+    value: "20.0"
     type: PROPERTY_TYPE_NUMBER
   }
 }

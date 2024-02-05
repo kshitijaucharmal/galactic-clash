@@ -93,6 +93,7 @@ local function move_in_dir(self, dir, steps)
 end
 
 function check_enemies(self, target)
+    if not self.positions[target[1]] then return end
     local target_pos = self.positions[target[1]][target[2]]
     for i, id in pairs(self.archers) do
         local pos = go.get_position(id)
@@ -161,7 +162,7 @@ function get_front(self, dir, steps)
         go.delete(id)
     end)
     -- Remove any enemy if present
-    check_enemies(self, pos)
+    check_enemies(self, attack_pos)
 end
 
 function wait_for_turn(self)
