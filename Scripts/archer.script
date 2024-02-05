@@ -21,7 +21,7 @@ function shoot(self)
 	local duration = vmath.length(dir) / self.bullet_speed
 	go.animate(bullet, "position", go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, duration, 0, function()
 		if go.get_position(bullet) == go.get_position("player") then
-			msg.post("player", "archer_attack")
+			msg.post("player", "archer_attack", {self.damage})
 		end
 		go.delete(bullet)
 	end)

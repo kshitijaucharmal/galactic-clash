@@ -5,6 +5,7 @@ go.property("old_position", vmath.vector3())
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	label.set_text("ui#health", tostring(self.health))
 
 	self.old_position = go.get_position()
 end
@@ -70,9 +71,10 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("archer_attack") then
 		-- Reduce health randomly between 5 and 10 HP
-		self.health = self.health - math.random(5, 10)
+		self.health = self.health - message[1]
+		label.set_text("ui#health", tostring(self.health))
 		if self.health <= 0 then 
-			die() 
+			die()
 		end
 	end
 
