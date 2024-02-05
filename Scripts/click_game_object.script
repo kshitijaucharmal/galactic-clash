@@ -51,6 +51,8 @@ function init(self)
 
 	self.pos_to_go = go.get_position()
 	goput.add("#sprite", nil, handle_click)
+
+	go.animate(".", "scale", go.PLAYBACK_LOOP_PINGPONG, vmath.vector3(1.2, 1.2, 1), go.EASING_INOUTCIRC, 0.5)
 end
 
 function final(self)

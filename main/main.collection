@@ -24,7 +24,7 @@ instances {
   prototype: "/Prefabs/player.go"
   position {
     x: 66.0
-    y: 146.0
+    y: 435.0
     z: 0.0
   }
   rotation {
@@ -500,7 +500,7 @@ embedded_instances {
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: -285.0
     z: 0.0
   }
   rotation {
